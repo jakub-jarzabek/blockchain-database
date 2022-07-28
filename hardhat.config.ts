@@ -34,7 +34,8 @@ const config: HardhatUserConfig = {
     enabled: true,
     currency: "PLN",
     coinmarketcap: process.env.API_KEY,
-    ...setChain()
+    // outputFile: `reports/gas-report-${process.env.CHAIN ?? "ethereum"}.csv`,
+    ...setChain(),
   },
   etherscan: {
     apiKey: process.env.ETH_API_KEY,
