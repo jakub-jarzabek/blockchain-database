@@ -56,7 +56,6 @@ describe("Token contract", function () {
     const obj = await db.getRecord(accounts[0].address);
     expect(obj.name).to.equal("xxxx");
     expect(obj.surname).to.equal("yyyy");
-
   });
   it("Should update 3  records", async function () {
     transaction = await db.updateThreeFields("xxxx", "yyyy", "uuuuu");
@@ -75,5 +74,12 @@ describe("Token contract", function () {
     expect(obj.name).to.equal("");
     expect(obj.surname).to.equal("");
     expect(obj.location).to.equal("");
+  });
+  it("Should emit event", async function () {
+    transaction = await db.connect(accounts[0]).emitEvent();
+    const result = await transaction.wait();
+    const event = result!.events![0];
+    const args = event!.args;
+    expect(args._address).to.equal(accounts[0].address);
   });
 });

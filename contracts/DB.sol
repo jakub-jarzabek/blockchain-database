@@ -21,6 +21,8 @@ contract DB {
   constructor(address _owner){
     owner = _owner;
   }
+  
+  event TestEvent(address _address );
 
   function updateOrAddRecord (string memory _name, string memory _surname, string memory _address, string memory _record_1, string memory _record_2, string memory _record_3, string memory _record_4, string memory _record_5) public returns (bool success){
 
@@ -67,8 +69,10 @@ contract DB {
   function getRecord(address _address) public view returns (Details memory details){
     return database[_address];
   }
-
   
+  function emitEvent() public {
+    emit TestEvent(msg.sender);
+  }
 
 }
 
